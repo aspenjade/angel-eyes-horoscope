@@ -1,0 +1,35 @@
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #111, #000);
+  color: white;
+  height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+.detail-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.detail-text {
+  max-width: 600px;
+  line-height: 1.6;
+  color: #ccc;
+  margin-bottom: 2rem;
+}
+
+.back-link {
+  color: #9c6bff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: #ffca28;
+}

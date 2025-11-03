@@ -1,0 +1,121 @@
+/* 🌠 Celestial Horoscope Grid Styles */
+
+/* Header */
+.app-title {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 2rem;
+  color: #577fce;
+  text-shadow: 0 0 12px rgba(192, 210, 237, 0.4);
+  font-family: 'Cinzel', serif; /* new font */
+  letter-spacing: 2px;           /* adds elegance */
+}
+
+/* Grid wrapper */
+.horoscope-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 per row on desktop */
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+.horoscope-card {
+  aspect-ratio: 1 / 1; /* width : height */
+  max-width: 180px;    /* optional, keeps cards from getting too wide */
+  width: 100%;
+}
+
+
+/* Cards */
+.horoscope-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.2rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(0, 30, 80, 0.3);
+  position: relative;
+  overflow: hidden;
+
+  /* ✅ Force same size */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 180px; /* Adjust as needed */
+}
+
+
+.horoscope-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+.horoscope-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(120deg, #7e57c2, #42a5f5, #ffca28, #ef5350);
+  background-size: 400% 400%;
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: -1;
+  filter: blur(12px);
+}
+
+.horoscope-card:hover::before {
+  opacity: 1;
+  animation: aurora 8s linear infinite;
+}
+
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.horoscope-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.horoscope-icon {
+  font-size: 3.2rem;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.3); /* soft white glow */
+}
+
+
+.horoscope-name {
+  font-size: 1.3rem;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #f5f3ff;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .horoscope-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .horoscope-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .horoscope-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

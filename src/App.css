@@ -1,0 +1,60 @@
+/* ✨ Global Celestial Theme ✨ */
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&family=Raleway:wght@300;500&display=swap');
+
+
+
+:root {
+  --star-color: rgba(255, 255, 255, 0.8);
+  --accent: #9c6bff;
+  --bg-dark: #050517;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Josefin Sans', 'Raleway', sans-serif;
+  background-color: var(--bg-dark);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Starry background overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 20% 40%, #0c0d2a 0%, #000010 80%);
+  background-image: 
+    radial-gradient(var(--star-color) 1px, transparent 1px),
+    radial-gradient(var(--star-color) 1px, transparent 1px);
+  background-size: 100px 100px, 150px 150px;
+  background-position: 0 0, 50px 50px;
+  animation: drift 200s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes drift {
+  from { background-position: 0 0, 50px 50px; }
+  to { background-position: 5000px 2500px, 5050px 2550px; }
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #ffca28;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: #d1c4e9;
+}
