@@ -16,7 +16,7 @@
     "express": "^5.1.0",
     "framer-motion": "^12.23.12",
     "node-cron": "^4.2.1",
-    "openai": "^6.8.0",
+    "openai": "^6.8.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.5"

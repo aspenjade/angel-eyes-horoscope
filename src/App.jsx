@@ -4,6 +4,7 @@ import HoroscopeGrid from "./components/HoroscopeGrid";
 import HoroscopeDetail from "./components/HoroscopeDetail";
 import ambientTrack from "./assets/angel_eyes_filter.wav"; // your audio file
 import "./App.css";
+import PreSave from "./components/PreSave";
 
 function App() {
   const audioRef = useRef(null);
@@ -41,6 +42,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<HoroscopeGrid />} />
+          <Route path="/presave/:sign" element={<PreSave />} />
           <Route path="/horoscope/:sign" element={<HoroscopeDetail />} />
         </Routes>
       </div>

@@ -5,10 +5,25 @@
   text-align: center;
   font-size: 2.8rem;
   margin-bottom: 2rem;
-  color: #577fce;
+  color: #91b6ff;
   text-shadow: 0 0 12px rgba(192, 210, 237, 0.4);
   font-family: 'Cinzel', serif; /* new font */
   letter-spacing: 2px;           /* adds elegance */
+}
+
+.horoscope-container {
+  min-height: 100vh;                     /* fills the entire viewport height */
+  width: 100%;                           /* take full width */
+  background-size: cover;                /* make image fill */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;          /* optional: nice parallax feel */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 4rem 2rem;                    /* space for title/grid */
+  box-sizing: border-box;
 }
 
 /* Grid wrapper */

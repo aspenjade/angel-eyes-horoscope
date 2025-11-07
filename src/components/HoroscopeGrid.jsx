@@ -32,7 +32,7 @@ export default function HoroscopeGrid() {
           <div
             key={sign.name}
             className="horoscope-card"
-            onClick={() => navigate(`/horoscope/${sign.name.toLowerCase()}`)}
+            onClick={() => navigate(`/presave/${sign.name.toLowerCase()}`)}
           >
             <div className="horoscope-icon">{sign.icon}</div>
             <div className="horoscope-name">{sign.name}</div>
