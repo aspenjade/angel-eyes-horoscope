@@ -122,33 +122,33 @@ export async function verifyDailyHoroscopes(dateStr) {
 
 
 // cron: midnight LA time
-cron.schedule("0 0 * * *", async () => {
-  const d = todayStr();
-  try {
-    await ensureDailyHoroscopes(d);
-    console.log(`[cron] generated ${d}`);
-  } catch (e) {
-    console.error("[cron] error", e);
-  }
-}, { timezone: "America/Los_Angeles" });
+// cron.schedule("0 0 * * *", async () => {
+//   const d = todayStr();
+//   try {
+//     await ensureDailyHoroscopes(d);
+//     console.log(`[cron] generated ${d}`);
+//   } catch (e) {
+//     console.error("[cron] error", e);
+//   }
+// }, { timezone: "America/Los_Angeles" });
 
-// warm start
-console.log("[warm-start] checking today's horoscopes...");
+// // warm start
+// console.log("[warm-start] checking today's horoscopes...");
 
-ensureDailyHoroscopes(todayStr())
-  .then(async () => {
-    console.log("[warm-start] ✅ horoscopes ready for", todayStr());
-    console.log("[verify] starting integrity check...");
-    try {
-      await verifyDailyHoroscopes(todayStr());
-      console.log("[verify] ✅ verification complete");
-    } catch (verifyErr) {
-      console.error("[verify] ❌ verification error:", verifyErr);
-    }
-  })
-  .catch((err) => {
-    console.error("[warm-start] ❌ error generating horoscopes:", err);
-  });
+// ensureDailyHoroscopes(todayStr())
+//   .then(async () => {
+//     console.log("[warm-start] ✅ horoscopes ready for", todayStr());
+//     console.log("[verify] starting integrity check...");
+//     try {
+//       await verifyDailyHoroscopes(todayStr());
+//       console.log("[verify] ✅ verification complete");
+//     } catch (verifyErr) {
+//       console.error("[verify] ❌ verification error:", verifyErr);
+//     }
+//   })
+//   .catch((err) => {
+//     console.error("[warm-start] ❌ error generating horoscopes:", err);
+//   });
 
 // API: get today’s horoscope for a sign
 app.get("/api/horoscope/:sign", async (req, res) => {
@@ -171,5 +171,5 @@ app.post("/api/admin/regenerate", async (_req, res) => {
   res.json({ ok: true, date: d });
 });
 
-const port = process.env.PORT || 3001;
-app.listen(port, () => console.log(`API listening on :${port}`));
+// const port = process.env.PORT || 3001;
+// app.listen(port, () => console.log(`API listening on :${port}`));
