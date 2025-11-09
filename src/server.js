@@ -171,5 +171,20 @@ app.post("/api/admin/regenerate", async (_req, res) => {
   res.json({ ok: true, date: d });
 });
 
+
+if (process.env.VERCEL_ENV === "production") {
+  console.log("[warm-start] generating horoscopes on deploy...");
+  const d = todayStr();
+  ensureDailyHoroscopes(d)
+    .then(async () => {
+      console.log("[warm-start] ✅ horoscopes ready for", d);
+      await verifyDailyHoroscopes(d);
+      console.log("[verify] ✅ verification complete");
+    })
+    .catch((err) => {
+      console.error("[warm-start] ❌ error generating horoscopes:", err);
+    });
+}
+
 // const port = process.env.PORT || 3001;
 // app.listen(port, () => console.log(`API listening on :${port}`));
