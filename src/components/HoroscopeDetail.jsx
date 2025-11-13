@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./HoroscopeDetail.css";
 
+// ✅ Import all JSON horoscope files at build time
+const horoscopeFiles = import.meta.glob("../../data/*.json", { eager: true });
+
 export default function HoroscopeDetail() {
   const { sign } = useParams();
   const navigate = useNavigate();
   const [horoscope, setHoroscope] = useState("Loading…");
   const [error, setError] = useState("");
 
-  // 🔒 gate: require presave unlock
+  // 🔒 Require presave unlock before viewing
   useEffect(() => {
     const ok = localStorage.getItem(`presave_unlocked_${sign}`);
     if (!ok) {
@@ -17,17 +20,22 @@ export default function HoroscopeDetail() {
   }, [sign, navigate]);
 
   useEffect(() => {
+    
     const today = new Date().toISOString().split("T")[0]; // e.g. "2025-11-12"
+    console.log("🪐 Looking for horoscope file:", today);
 
-    import(`../../data/${today}.json`)
-      .then((module) => {
-        const data = module.default;
-        setHoroscope(data[sign] || "No horoscope yet ✨");
-      })
-      .catch((err) => {
-        console.error("Error loading horoscope:", err);
-        setError("Failed to load horoscope BLOOOPPP.");
-      });
+    // Build the file path based on today's date
+    const path = `../../data/${today}.json`;
+    const file = horoscopeFiles[path];
+
+    if (file) {
+      const data = file.default;
+      console.log("✅ Loaded horoscope data:", data);
+      setHoroscope(data[sign] || "No horoscope yet ✨");
+    } else {
+      console.warn("⚠️ No horoscope file found for:", today);
+      setError("Failed to load horoscope (file missing).");
+    }
   }, [sign]);
 
   return (
