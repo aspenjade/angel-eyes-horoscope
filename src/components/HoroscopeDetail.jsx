@@ -20,8 +20,10 @@ export default function HoroscopeDetail() {
   }, [sign, navigate]);
 
   useEffect(() => {
-    
-    const today = new Date().toISOString().split("T")[0]; // e.g. "2025-11-12"
+
+    const today = new Date().toLocaleDateString("en-CA", {
+      timeZone: "America/Los_Angeles",
+      });// e.g. "2025-11-12"
     console.log("🪐 Looking for horoscope file:", today);
 
     // Build the file path based on today's date
