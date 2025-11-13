@@ -1,6 +1,7 @@
 // src/components/HoroscopeDetail.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import horoscopeData from "../data/horoscope.json"; // adjust path as needed
 import "./HoroscopeDetail.css";
 
 export default function HoroscopeDetail() {
@@ -9,19 +10,20 @@ export default function HoroscopeDetail() {
   const [horoscope, setHoroscope] = useState("Loading…");
   const [error, setError] = useState("");
 
-  // 🔒 gate: require presave unlock
   useEffect(() => {
     const ok = localStorage.getItem(`presave_unlocked_${sign}`);
-    if (!ok) {
-      navigate(`/presave/${sign}`, { replace: true });
-    }
+    if (!ok) navigate(`/presave/${sign}`, { replace: true });
   }, [sign, navigate]);
 
   useEffect(() => {
-    fetch(`/api/horoscope/${sign}`)
-      .then((res) => res.json())
-      .then((data) => setHoroscope(data.horoscope || "No horoscope yet ✨"))
-      .catch(() => setError("Failed to load horoscope."));
+    try {
+      const text =
+        horoscopeData[sign.toLowerCase()] || "No horoscope yet ✨";
+      setHoroscope(text);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to load horoscope.");
+    }
   }, [sign]);
 
   return (
