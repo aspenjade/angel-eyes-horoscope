@@ -1,4 +1,3 @@
-// src/components/HoroscopeDetail.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./HoroscopeDetail.css";
@@ -18,10 +17,17 @@ export default function HoroscopeDetail() {
   }, [sign, navigate]);
 
   useEffect(() => {
-    fetch(`/api/horoscope/${sign}`)
-      .then((res) => res.json())
-      .then((data) => setHoroscope(data.horoscope || "No horoscope yet ✨"))
-      .catch(() => setError("Failed to load horoscope."));
+    const today = new Date().toISOString().split("T")[0]; // e.g. "2025-11-12"
+
+    import(`../data/${today}.json`)
+      .then((module) => {
+        const data = module.default;
+        setHoroscope(data[sign] || "No horoscope yet ✨");
+      })
+      .catch((err) => {
+        console.error("Error loading horoscope:", err);
+        setError("Failed to load horoscope.");
+      });
   }, [sign]);
 
   return (
