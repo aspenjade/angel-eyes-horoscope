@@ -19,14 +19,14 @@ export default function HoroscopeDetail() {
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0]; // e.g. "2025-11-12"
 
-    import(`../data/${today}.json`)
+    import(`../../data/${today}.json`)
       .then((module) => {
         const data = module.default;
         setHoroscope(data[sign] || "No horoscope yet ✨");
       })
       .catch((err) => {
         console.error("Error loading horoscope:", err);
-        setError("Failed to load horoscope.");
+        setError("Failed to load horoscope BLOOOPPP.");
       });
   }, [sign]);
 
